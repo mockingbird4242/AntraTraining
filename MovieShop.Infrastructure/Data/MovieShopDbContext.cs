@@ -27,6 +27,10 @@ namespace MovieShop.Infrastructure.Data
                 .UsingEntity<Dictionary<string, object>>("UserRole",
                     u => u.HasOne<Role>().WithMany().HasForeignKey("RoleId"),
                     r => r.HasOne<User>().WithMany().HasForeignKey("UserId"));
+            /*modelBuilder.Entity<MovieCast>().HasMany(m => m.Casts).WithMany(g => g.Movies)
+                .UsingEntity<Dictionary<string, object>>("MovieGenre",
+                    m => m.HasOne<Genre>().WithMany().HasForeignKey("GenreId"),
+                    g => g.HasOne<Movie>().WithMany().HasForeignKey("MovieId"));*/
             modelBuilder.Entity<MovieCast>(ConfigureMovieCast);
             modelBuilder.Entity<Cast>(ConfigureCast);
             modelBuilder.Entity<Review>(ConfigureReview);
@@ -89,6 +93,7 @@ namespace MovieShop.Infrastructure.Data
             builder.Property(c => c.Name).HasMaxLength(128);
             builder.Property(c => c.ProfilePath).HasMaxLength(2084);
         }
+
 
         private void ConfigureReview(EntityTypeBuilder<Review> builder)
         {
